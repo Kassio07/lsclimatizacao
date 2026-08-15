@@ -941,13 +941,13 @@ blockquote footer{
     gap:7px 18px;
     font-size:.78rem
   }
-  .trust-strip .container{
-    width:100%
-  }
   .trust-strip span{
     min-height:66px;
     padding:10px 15px;
     font-size:.78rem
+  }
+  .trust-strip span:first-child{
+    padding-left:15px
   }
   .trust-strip span:nth-child(2){
     border-right:0
