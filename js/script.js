@@ -67,5 +67,20 @@
       if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
     }), { threshold: .12 }); items.forEach(item => observer.observe(item));
   } else items.forEach(item => item.classList.add('visible'));
+  const instagramReel = document.querySelector('.instagram-reel[data-src]');
+  if (instagramReel) {
+    const loadInstagramReel = () => {
+      if (!instagramReel.hasAttribute('src')) instagramReel.src = instagramReel.dataset.src;
+    };
+    if ('IntersectionObserver' in window) {
+      const embedObserver = new IntersectionObserver(entries => {
+        if (entries.some(entry => entry.isIntersecting)) {
+          loadInstagramReel();
+          embedObserver.disconnect();
+        }
+      }, { rootMargin: '300px 0px' });
+      embedObserver.observe(instagramReel);
+    } else loadInstagramReel();
+  }
   const year = document.querySelector('#year'); if (year) year.textContent = new Date().getFullYear();
 })();

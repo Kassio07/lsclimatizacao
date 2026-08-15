@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
-
 /* ==========================================================
    1. Variaveis e estilos globais
    ========================================================== */
@@ -209,7 +207,7 @@ button,input{
   inset:0
 }
 .hero-photo{
-  background:url('../assets/images/hero-ar-condicionado.jpg') center/cover no-repeat
+  background:url('../assets/images/hero-ar-condicionado-otimizado.jpg') center/cover no-repeat
 }
 .hero-shade{
   background:linear-gradient(90deg,rgba(3,24,43,.95) 0%,rgba(3,31,55,.82) 46%,rgba(3,24,43,.18) 78%),linear-gradient(0deg,rgba(3,24,43,.42),transparent 50%)
@@ -1465,14 +1463,14 @@ blockquote footer{
   transform:scale(1)
 }
 .slide-climatizacao{
-  background-image:url('../assets/images/hero-ar-condicionado.jpg')
+  background-image:url('../assets/images/hero-ar-condicionado-otimizado.jpg')
 }
 .slide-manutencao{
-  background-image:url('../assets/images/hero-manutencao-climatizacao.jpg');
+  background-image:url('../assets/images/hero-manutencao-climatizacao-otimizado.jpg');
   background-position:center 38%
 }
 .slide-eletrica{
-  background-image:url('../assets/images/hero-servicos-eletricos.jpg');
+  background-image:url('../assets/images/hero-servicos-eletricos-otimizado.jpg');
   background-position:center
 }
 .hero-carousel .hero-grid{
