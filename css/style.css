@@ -1044,15 +1044,14 @@ blockquote footer{
    a aparencia aprovada da pagina.
    ========================================================== */
 .brand-logo{
-  width:68px;
-  height:68px;
-  border-radius:50%;
-  object-fit:cover;
-  box-shadow:0 4px 16px rgba(0,0,0,.18)
+  width:104px;
+  height:auto;
+  object-fit:contain;
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,.18))
 }
 .footer-logo{
-  width:112px;
-  height:112px
+  width:148px;
+  height:auto
 }
 .button{
   background:var(--orange);
@@ -1627,12 +1626,12 @@ blockquote footer{
 }
 @media(max-width:600px){
   .brand-logo{
-    width:58px;
-    height:58px
+    width:90px;
+    height:auto
   }
   .footer-logo{
-    width:104px;
-    height:104px
+    width:132px;
+    height:auto
   }
   .copyright{
     display:flex;
