@@ -67,20 +67,56 @@
       if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
     }), { threshold: .12 }); items.forEach(item => observer.observe(item));
   } else items.forEach(item => item.classList.add('visible'));
-  const instagramReel = document.querySelector('.instagram-reel[data-src]');
-  if (instagramReel) {
-    const loadInstagramReel = () => {
-      if (!instagramReel.hasAttribute('src')) instagramReel.src = instagramReel.dataset.src;
+  const instagramReels = [...document.querySelectorAll('.instagram-reel[data-src]')];
+  const activeReels = instagramReels.filter(reel => {
+    const hasSource = Boolean(reel.dataset.src?.trim());
+    if (!hasSource) reel.closest('.reel-card')?.setAttribute('hidden', '');
+    return hasSource;
+  });
+  const loadInstagramReel = reel => {
+    if (!reel.hasAttribute('src')) reel.src = reel.dataset.src;
+  };
+  if (activeReels.length && 'IntersectionObserver' in window) {
+    const embedObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        loadInstagramReel(entry.target);
+        embedObserver.unobserve(entry.target);
+      }
+    }), { rootMargin: '300px 0px' });
+    activeReels.forEach(reel => embedObserver.observe(reel));
+  } else activeReels.forEach(loadInstagramReel);
+  const reviewsCarousel = document.querySelector('.reviews-carousel');
+  if (reviewsCarousel) {
+    const track = reviewsCarousel.querySelector('.reviews-track');
+    const cards = [...reviewsCarousel.querySelectorAll('.review-card')];
+    const previousReview = reviewsCarousel.querySelector('.reviews-prev');
+    const nextReview = reviewsCarousel.querySelector('.reviews-next');
+    const status = reviewsCarousel.querySelector('.reviews-status');
+    let reviewPage = 0;
+    const reviewsPerPage = () => matchMedia('(max-width: 600px)').matches ? 1 : 2;
+    const updateReviews = () => {
+      const perPage = reviewsPerPage();
+      const pages = Math.ceil(cards.length / perPage);
+      reviewPage = Math.min(reviewPage, pages - 1);
+      track.style.transform = `translateX(-${reviewPage * 100}%)`;
+      if (status) status.textContent = `${reviewPage + 1} de ${pages}`;
+      cards.forEach((card, index) => {
+        const visible = index >= reviewPage * perPage && index < (reviewPage + 1) * perPage;
+        card.setAttribute('aria-hidden', String(!visible));
+      });
     };
-    if ('IntersectionObserver' in window) {
-      const embedObserver = new IntersectionObserver(entries => {
-        if (entries.some(entry => entry.isIntersecting)) {
-          loadInstagramReel();
-          embedObserver.disconnect();
-        }
-      }, { rootMargin: '300px 0px' });
-      embedObserver.observe(instagramReel);
-    } else loadInstagramReel();
+    previousReview?.addEventListener('click', () => {
+      const pages = Math.ceil(cards.length / reviewsPerPage());
+      reviewPage = (reviewPage - 1 + pages) % pages;
+      updateReviews();
+    });
+    nextReview?.addEventListener('click', () => {
+      const pages = Math.ceil(cards.length / reviewsPerPage());
+      reviewPage = (reviewPage + 1) % pages;
+      updateReviews();
+    });
+    window.addEventListener('resize', updateReviews, { passive: true });
+    updateReviews();
   }
   const year = document.querySelector('#year'); if (year) year.textContent = new Date().getFullYear();
 })();
