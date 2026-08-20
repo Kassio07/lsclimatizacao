@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lsclimatizacao.vercel.app/sitemap.xml
+Sitemap: https://ls-climatizacao.vercel.app/sitemap.xml

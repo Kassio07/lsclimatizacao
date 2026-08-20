@@ -6,7 +6,7 @@ O site apresenta serviços de climatização, assistência técnica para eletrod
 
 ## Demonstração
 
-Produção: [https://lsclimatizacao.vercel.app/](https://lsclimatizacao.vercel.app/)
+Produção: [https://ls-climatizacao.vercel.app/](https://ls-climatizacao.vercel.app/)
 
 ## Tecnologias
 
